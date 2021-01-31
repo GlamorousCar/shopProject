@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>VNTG</title>
+    <link rel="stylesheet" href="/static/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/assets/css/Bootstrap-Payment-Form.css">
+    <link rel="stylesheet" href="/static/assets/css/Pretty-Registration-Form.css">
+    <link rel="stylesheet" href="/static/assets/css/Product-Details.css">
+    <link rel="stylesheet" href="/static/assets/css/styles.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-light navbar-expand-md" style="padding: 8px 8px;background-color: #71766e;">
+        <div class="container-fluid"><a class="navbar-brand" href="/" style="margin-right: 8px;color: rgb(32,40,43);font-family: 'Alegreya SC', serif;"><br>RENAISSANCE.VNTG<br><br></a><button data-toggle="collapse" data-target="#navcol-1" class="navbar-toggler"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div
+                class="collapse navbar-collapse" id="navcol-1">
+                <ul class="nav navbar-nav mx-auto">
+                    <ul class="nav navbar-nav mx-auto">
+                    {%block category%} {% include "category.html"%}{% endblock %}
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="font-family: 'Alegreya SC', serif;color: rgba(0,0,0,0.7);">Эксклюзив</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="font-family: 'Alegreya SC', serif;color: rgba(0,0,0,0.7);">Статьи</a></li>
+
+                    </ul>
+        </div>
+        <div class="collapse navbar-collapse" id="navcol-1" style="color: rgb(32,40,43);">
+            <ul class="nav navbar-nav ml-auto">
+                <li class="nav-item" role="presentation"><a class="nav-link active" href="#" style="height: 40px;font-size: 20px;color: rgb(32,40,43);font-family: 'Alegreya SC', serif;">О нас</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link active" href="#" style="color: rgb(32,40,43);font-size: 20px;font-family: 'Alegreya SC', serif;">Учетная запись</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" href="/cart" style="color: rgb(32,40,43);font-size: 20px;filter: sepia(0%);font-family: 'Alegreya SC', serif;">Корзина</a></li>
+                <li class="nav-item" role="presentation"></li>
+            </ul>
+        </div>
+        </div>
+    </nav>
+    <div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row .payment-dialog-row" style="padding: 0px;">
+                        <div class="col-12 col-md-4 offset-md-4" style="margin: 5px;margin-left: 0px;width: 196px;">
+                            <div class="card credit-card-box" style="width: 326px;">
+                                <div class="card-body" style="width: 324px;padding: 23px;">
+                                    <form id="payment-form">
+                                        <div class="form-row">
+                                            <div class="col-12">
+                                                <form action="{% url "orders:order_create" %}" method="post" class="order-form">
+                                                    {{ form.as_p }}
+                                                    <p><input type="submit" value="Place order"></p>
+                                                    {% csrf_token %}
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 d-flex align-items-center">
+                    <h3 style="margin-bottom: 240px;margin-left: 104px;">Ваш заказ</h3>
+                    <ul style="margin-left: -242px;">
+                        {% for item in cart %}
+                            <li>
+                                {{ item.product.title }}
+                                <span>{{ item.total_price }}</span>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                    <p>Всего:{{ cart.get_total_price }}₽</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/static/assets/js/jquery.min.js"></script>
+    <script src="/static/assets/bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>

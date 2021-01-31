@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div style="margin-top:50px">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row .payment-dialog-row" style="padding: 0px;">
+                        <div class="col-12 col-md-4 offset-md-4" style="margin: 5px;margin-left: 0px;width: 196px;">
+                            <div class="card credit-card-box" style="width: 326px;">
+                                <div class="card-body" style="width: 324px;padding: 23px;">
+                                    <form action="." method="post" class="order-form">
+                                            {{ form.as_p }}
+                                        <div class="form-row">
+                                            <div class="col-12"><input type="submit" class="btn btn-success btn-block btn-lg" value="Оформить заказ"></div>
+                                        </div>
+                                            {% csrf_token %}
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 text-center d-flex align-items-center">
+                    <h3 class="text-center align-self-start" style="margin-bottom: 240px;margin-left: 104px;">Ваш заказ</h3>
+                    <ol class="text-left align-self-start" style="margin-left: -215px;margin-top: 69px;">
+                    {% for item in cart %}
+                        <li>
+                            <!--{{ item.quantity }}--> {{ item.product.title }}
+                            <span>{{ item.total_price }}</span>
+                        <br></li>
+                    {% endfor %}
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

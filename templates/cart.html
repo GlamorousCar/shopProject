@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h2 class="text-center" style="margin-top: 10px;">Корзина</h2>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Название</th>
+                    <th></th>
+                    <th>Цена</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in cart %}
+            {% with product=item.product %}
+                <tr>
+                    <td>
+                        <a href="{{ product.get_absolute_url }}">
+                            <img src="
+                                {% if product.image %}
+                                    {{ product.image.url }}
+                                {% else %}
+                                {% endif %}" width="250px">
+                        </a>
+                    </td>
+                    <td>{{ product.title }}</td>
+                    <td><a href="{% url "cart:cart_remove" product.id%}">Удалить</a></td>
+                    <td class="num">{{ item.price }}<i class="fa fa-rouble"></i></td>
+                </tr>
+            {% endwith %}
+        {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td><strong>Итого</strong><br></td>
+                    <td>{{ cart.get_total_price }}</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <a href="{% url "orders:order_create" %}" class="btn btn-success text-left float-right">
+    Оформить Заказ
+        </a>
+
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="row" id="trow">
+        {% for obj in products%}
+            <div class="col-6 col-sm-4 col-xl-4 d-inline-block block" style="padding: auto;">
+                <div class="block__inner"><a href="{{ obj.get_absolute_url }}"><img class="image" src="/media/{{ obj.image }}" style="padding: 3px;"></a></div>
+            </div>
+
+        {% endfor %}
+    </div>
+
+
+    <footer class="rounded-0" style="margin-top: 17px;">
+        <nav class="text-center d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex justify-content-center justify-content-sm-center justify-content-md-center justify-content-lg-center justify-content-xl-center">
+            <ul class="pagination">
+                {% if products.has_previous %}
+                    <li class="page-item"><a class="page-link" href="?page={{ products.previous_page_number }}" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
+
+                {% endif %}
+                {% for page in products.paginator.page_range %}
+                <li class="page-item"><a class="page-link" href="?page={{page}}">{{ page }}</a></li>
+                {% endfor %}
+
+
+                {% if products.has_next %}
+                    <li class="page-item"><a class="page-link" href="?page={{ products.next_page_number }}" aria-label="Next"><span aria-hidden="true">»</span></a></li>
+
+                {% endif %}
+            </ul>
+
+        </nav>
+    </footer>
+
+
+<hr style="height: 2px;">
+<footer id="iu" class="bottom" style="background-color: rgb(255,255,255);margin-top: 70px;margin-bottom: 50px;">
+    <h2 class="text-center" style="color: rgb(0,0,0);">Подпишитесь на нашу рассылку</h2>
+    <h5 class="text-center" style="color: rgb(0,0,0);margin:0px;margin-bottom: 25px;">и получайте ...</h5>
+
+    <form  method="POST" id="form" style="margin-left: auto;height: 35px;">
+         {% csrf_token %}
+        <div class="form-row" id = "rtyr" style="height: 100%;max-height: 100%;">
+            <div class="col-7 col-sm-8 col-md-8 col-lg-8 col-xl-8" style="max-width: auto;width: 100%;margin-left: 0px;padding-right: 15px;padding-left: 15px;height: 100%;min-height: 100%;">{{ form.email}}</div>
+            <div class="col-5 col-sm-4 col-md-4 col-lg-3 col-xl-3" style="padding-right: 15px;padding-left: 15px;height: 100%;"><button class="btn text-center d-inline-block d-md-flex justify-content-md-center align-items-md-center justify-content-xl-center align-items-xl-center rounded-0" type="submit" style="width: 100%;color: rgb(255,255,255);background-color: #595755;height: 100%;">Подписаться</button></div>
+        </div>
+    </form>
+
+</footer>
+{% endblock %}

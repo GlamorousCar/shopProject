@@ -1,0 +1,7 @@
+
+{%block category %}
+
+    {% for category in categories %}
+        <li class="nav-item" role="presentation"><a class="nav-link" href="/category/{{ category.slug }}" style="font-family: 'Alegreya SC', serif;color: rgba(0,0,0,0.7);">{{ category.name }}</a></li>
+    {% endfor %}
+{%  endblock %}

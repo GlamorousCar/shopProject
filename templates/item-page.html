@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="row" style="margin-bottom: 0px;margin-top: 25px;max-width: 95%;">
+        <div class="col-md-6 col-xl-5" style="margin-bottom: 7px;padding-left: 15px;margin-left: 0px;">
+            <h3>{{ products.title }}</h3>
+            <p style="padding-left: 10px;">{{ products.description|linebreaksbr }}</p>
+        {% if products.sale == True %}
+            <h6 class="text-monospace text-lowercase text-left text-dark ins" style="color: rgb(39,106,28);font-family: 'B612 Mono', monospace;"><s>{{ products.price }}</s><i class="fa fa-rouble"></i></h6>
+            <h5 class="text-left text-dark" style="color: rgb(39,106,28);font-family: 'B612 Mono', monospace;">{{ products.discount_price }}<i class="fa fa-rouble"></i></h5>
+        {% else %}
+            <h5 class="text-left text-dark" style="color: rgb(39,106,28);font-family: 'B612 Mono', monospace;">{{ products.price }}<i class="fa fa-rouble"></i></h5>
+        {% endif %}
+
+            {% if products.Instock == True %}
+            <form action="{% url "cart:cart_add" products.id %}" method="post">
+                {{ cart_product_form }}
+                {% csrf_token %}
+                <button class="btn btn-dark active btn-lg center-block" type="submit" style="margin-bottom: 14px;"><i class="fa fa-cart-plus"></i> Добавить в корзину</button></div>
+            </form>
+            {% else %}
+                <button class="btn btn-secondary btn-lg center-block" type="submit" style="margin-bottom: 14px;"><i class="fa fa-cart-plus"></i> Нет в Наличии</button></div>
+
+            {% endif %}
+
+        <div class="col-md-7 col-xl-7">
+            <div class="row text-center d-sm-flex d-lg-flex d-xl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-lg-center justify-content-xl-center slider-for" id="uyt" style="background-color: rgba(0,0,0,0);padding-left: 0px;margin-left: 0px;">
+                 <div class="col-md-10 col-xl-12 text-center m-auto"><img class="img-thumbnail center-block" id="first" src="/media/{{products.image }}" style="width: 492px;"></div>
+                {% for image in products.images.all %}
+                    <div class="col-md-10 col-xl-12 text-center m-auto"><img class="img-thumbnail center-block" id="first" src="/media/{{image }}" style="width: 492px;"></div>
+                {% endfor %}
+                 <div class="col-md-10 col-xl-12 text-center m-auto"><img class="img-thumbnail center-block" id="first" src="/media/{{products.image }}" style="width: 492px;"></div>
+
+                {% for image in products.images.all %}
+                    <div class="col-md-10 col-xl-12 text-center m-auto"><img class="img-thumbnail center-block" id="first" src="/media/{{image }}" style="width: 492px;"></div>
+                {% endfor %}
+                 <div class="col-md-10 col-xl-12 text-center m-auto"><img class="img-thumbnail center-block" id="first" src="/media/{{products.image }}" style="width: 492px;"></div>
+                {% for image in products.images.all %}
+                    <div class="col-md-10 col-xl-12 text-center m-auto"><img class="img-thumbnail center-block" id="first" src="/media/{{image }}" style="width: 492px;"></div>
+                {% endfor %}
+
+            </div>
+            <div class="row justify-content-center slider" style="background-color: rgba(0,0,0,0);max-width: 76%;">
+                <div class="col-4 col-md-4 col-xl-4 d-inline-block block" id="icol" style="padding: 4px;">
+                    <div class="block__inner"><img class="img-fluid image" src="/media/{{ products.image }}"style="padding: 3px;"></div>
+                </div>
+                {% for image in products.images.all %}
+                    <div class="col-4 col-md-4 col-xl-4 d-inline-block block" id="icol" style="padding: 4px;">
+                        <div class="block__inner"><img class="img-fluid image" src="/media/{{ image }}" style="padding: 3px;"></div>
+                    </div>
+                {% endfor %}
+                <div class="col-4 col-md-4 col-xl-4 d-inline-block block" id="icol" style="padding: 4px;">
+                    <div class="block__inner"><img class="img-fluid image" src="/media/{{ products.image }}"style="padding: 3px;"></div>
+                </div>
+                {% for image in products.images.all %}
+                    <div class="col-4 col-md-4 col-xl-4 d-inline-block block" id="icol" style="padding: 4px;">
+                        <div class="block__inner"><img class="img-fluid image" src="/media/{{ image }}" style="padding: 3px;"></div>
+                    </div>
+                {% endfor %}
+                <div class="col-4 col-md-4 col-xl-4 d-inline-block block" id="icol" style="padding: 4px;">
+                    <div class="block__inner"><img class="img-fluid image" src="/media/{{ products.image }}"style="padding: 3px;"></div>
+                </div>
+                {% for image in products.images.all %}
+                    <div class="col-4 col-md-4 col-xl-4 d-inline-block block" id="icol" style="padding: 4px;">
+                        <div class="block__inner"><img class="img-fluid image" src="/media/{{ image }}" style="padding: 3px;"></div>
+                    </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
