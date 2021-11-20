@@ -2,18 +2,26 @@
 
 {% block content %}
     <div class="row" id="trow">
+
+    {% if products %}
         {% for obj in products%}
             <div class="col-6 col-sm-4 col-xl-4 d-inline-block block" style="padding: auto;">
                 <div class="block__inner"><a href="{{ obj.get_absolute_url }}"><img class="image" src="/media/{{ obj.image }}" style="padding: 3px;"></a></div>
             </div>
-
         {% endfor %}
+    {% else %}
+        <div class="text-center" style="margin: 79px;margin-right: 10px;margin-left: 10px;margin-top: 36px;margin-bottom: 1%;">
+            <h1>Простите, товаров пока нет в наличии<img class="img-fluid" src="/static/mops.jpg" style="padding: 0px;width: 80%;margin: 10%;margin-top: 1%;max-width: 84%;min-width: 50%;" /></h1>
+        </div>
+    {% endif %}
+
     </div>
 
 
     <footer class="rounded-0" style="margin-top: 17px;">
         <nav class="text-center d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex justify-content-center justify-content-sm-center justify-content-md-center justify-content-lg-center justify-content-xl-center">
             <ul class="pagination">
+            {% if products.paginator.count > 9 %}
                 {% if products.has_previous %}
                     <li class="page-item"><a class="page-link" href="?page={{ products.previous_page_number }}" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
 
@@ -25,8 +33,8 @@
 
                 {% if products.has_next %}
                     <li class="page-item"><a class="page-link" href="?page={{ products.next_page_number }}" aria-label="Next"><span aria-hidden="true">»</span></a></li>
-
                 {% endif %}
+            {% endif %}
             </ul>
 
         </nav>

@@ -15,7 +15,7 @@
             <form action="{% url "cart:cart_add" products.id %}" method="post">
                 {{ cart_product_form }}
                 {% csrf_token %}
-                <button class="btn btn-dark active btn-lg center-block" type="submit" style="margin-bottom: 14px;"><i class="fa fa-cart-plus"></i> Добавить в корзину</button></div>
+                <button class="btn btn-dark active btn-lg center-block" type="submit" style="margin-bottom: 14px;background-color: #3A2B1C"><i class="fa fa-cart-plus"></i> Добавить в корзину</button></div>
             </form>
             {% else %}
                 <button class="btn btn-secondary btn-lg center-block" type="submit" style="margin-bottom: 14px;"><i class="fa fa-cart-plus"></i> Нет в Наличии</button></div>
@@ -24,11 +24,11 @@
 
         <div class="col-md-7 col-xl-7">
             <div class="row text-center d-sm-flex d-lg-flex d-xl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-lg-center justify-content-xl-center slider-for" id="uyt" style="background-color: rgba(0,0,0,0);padding-left: 0px;margin-left: 0px;">
-                 <div class="col-md-10 col-xl-12 text-center m-auto"><img class="img-thumbnail center-block" id="first" src="/media/{{products.image }}" style="width: 492px;"></div>
+                 <div class="col-md-10 col-xl-12 text-center m-auto"><img class="img-thumbnail center-block" id="first" src="/media/{{ products.image }}" style="width: 492px;"></div>
                 {% for image in products.images.all %}
-                    <div class="col-md-10 col-xl-12 text-center m-auto"><img class="img-thumbnail center-block" id="first" src="/media/{{image }}" style="width: 492px;"></div>
+                    <div class="col-md-10 col-xl-12 text-center m-auto"><img class="img-thumbnail center-block" id="first" src="/media/{{ image}}" style="width: 492px;"></div>
                 {% endfor %}
-                 <div class="col-md-10 col-xl-12 text-center m-auto"><img class="img-thumbnail center-block" id="first" src="/media/{{products.image }}" style="width: 492px;"></div>
+                 <div class="col-md-10 col-xl-12 text-center m-auto"><img class="img-thumbnail center-block" id="first" src="/media/{{ products.image }}" style="width: 492px;"></div>
 
                 {% for image in products.images.all %}
                     <div class="col-md-10 col-xl-12 text-center m-auto"><img class="img-thumbnail center-block" id="first" src="/media/{{image }}" style="width: 492px;"></div>

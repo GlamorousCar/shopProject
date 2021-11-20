@@ -70,3 +70,6 @@ def exclusive_view(request):
 
 def cart(request):
     return render(request, 'cart.html')
+
+
+

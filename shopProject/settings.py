@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
-
+import socket
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -24,12 +24,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: don't run with debug turned on in production!
 
 
-ALLOWED_HOSTS = []
-SECRET_KEY = os.getenv('SECRET_KEY')
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
-EMAIL_HOST_PASSWORD = os.getenv('EMAIL_PASS')
+ALLOWED_HOSTS = ['127.0.0.1']
+DEBUG = socket.gethostname() != os.environ.get('PRODUCTION_SERVER')
 
-DEBUG = True
 # Application definition
 
 INSTALLED_APPS = [
@@ -43,6 +42,7 @@ INSTALLED_APPS = [
     'cart.apps.CartConfig',
     'orders.apps.OrdersConfig',
     'mail_sending.apps.MailSendingConfig',
+
 
 ]
 
@@ -81,7 +81,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                #'shop.context_processors.category',
+                'shop.context_processors.category',
             ],
         },
     },
@@ -135,10 +135,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static"), ]
-#STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'project/static')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
-
 REDIS_HOST = '127.0.0.1'
 REDIS_PORT = '6379'
 CELERY_BROKER_URL = f'redis://{REDIS_HOST}:{REDIS_PORT}'
